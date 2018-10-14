@@ -27,7 +27,7 @@ public:
 		return iterator(begin, _startPos, end);
 	}
 
-	
+
 	SubTrie<T> GetSubTrie(const key_type & subKey) = delete;
 
 	size_t size() const

@@ -14,7 +14,7 @@ int main()
 		trie[to_string(i)] = i;
 	}
 	Trie<int> trie2;
-	trie2.insert(trie.begin(),trie.end());
-	
-	
+	trie2.insert(trie.begin(), trie.end());
+
+
 }

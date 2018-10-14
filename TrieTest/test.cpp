@@ -23,7 +23,7 @@ public:
 
 TEST_F(PoolTesting, Clear)
 {
-	
+
 	Trie<char> trie;
 	ifstream f("test.txt");
 	ASSERT_TRUE(f);
@@ -50,7 +50,7 @@ TEST(Trie, Insert)
 {
 	Trie<int> trie;
 	trie.insert("test", 123);
-	ASSERT_TRUE(trie["test"]==123);
+	ASSERT_TRUE(trie["test"] == 123);
 }
 
 TEST(Trie, InsertByOperator)
@@ -105,7 +105,7 @@ TEST(Trie, Swap)
 	ostringstream sstream1;
 	for (auto& i : trie)
 	{
-		sstream1 << i.first << " "<<i.second<<endl;
+		sstream1 << i.first << " " << i.second << endl;
 	}
 	ostringstream sstream2;
 	trie.swap(trie2);
@@ -156,9 +156,9 @@ TEST(Trie, FindUnCorrect)
 	}
 	catch (const std::out_of_range&)
 	{
-		
+
 	}
-		
+
 }
 
 TEST(Trie, SubTrie)
@@ -168,7 +168,7 @@ TEST(Trie, SubTrie)
 	for (size_t i = 0; i < 1000; i++)
 	{
 		std::string key = to_string(i);
-		if (key.substr(0,2) == "10")
+		if (key.substr(0, 2) == "10")
 		{
 			mTree[key] = i;
 		}

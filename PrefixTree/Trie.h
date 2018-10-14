@@ -124,7 +124,7 @@ public:
 	}
 
 
-	
+
 
 	template <class InputIterator> void insert(InputIterator first, InputIterator last)
 	{
@@ -171,7 +171,7 @@ public:
 
 	void clear()
 	{
-		
+
 		_trie.reset(new Node());
 		_trie.get()->parrent = nullptr;
 		_size = 0;
