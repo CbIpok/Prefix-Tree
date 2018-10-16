@@ -20,15 +20,7 @@ public:
 
 	struct Node
 	{
-		Node(Node* parrent = nullptr)
-		{
-			for (auto& i : childs)
-			{
-				i = nullptr;
-			}
-			this->parrent = parrent;
-			value.reset(nullptr);
-		}
+		Node(Node* parrent = nullptr) : parrent(parrent){}
 		std::unique_ptr<value_type> value;
 		std::unique_ptr<Node> childs[256];
 		Node* parrent;
@@ -51,16 +43,13 @@ public:
 	{
 		Trie<typename std::iterator_traits<InputIterator>::value_type> trie;
 		_trie = std::make_shared<Node>();
-		_trie.get()->parrent = nullptr;
 		trie.insert(first, last);
 	}
 
 
-	//Trie(const Trie<T> & trie);
-	virtual ~Trie()
-	{
-
-	}
+	
+	virtual ~Trie() = default;
+	
 
 
 	iterator begin()
@@ -86,7 +75,7 @@ public:
 
 	inline bool empty() const
 	{
-		return size() == 0;
+		return _size == 0;
 	}
 
 	inline size_t size() const
@@ -101,6 +90,7 @@ public:
 
 	value_type& operator[] (const key_type& k)
 	{
+		//auto&& [node, result] = _getNode(k);
 		auto findResult = _getNode(k);
 		Node& node = findResult.first;
 		if (node.value.get() == nullptr)
@@ -108,6 +98,7 @@ public:
 			node.value.reset(new value_type);
 		}
 		if (findResult.second)
+		//if (result)
 		{
 			_size++;
 		}
@@ -148,8 +139,7 @@ public:
 		}
 		else
 		{
-			delete(_getNode(k).first.value.release());
-			_getNode(k).first.value.reset(nullptr);
+			_getNode(k).first.value = nullptr;
 			_size--;
 			return 1;
 		}
@@ -172,8 +162,8 @@ public:
 	void clear()
 	{
 
-		_trie.reset(new Node());
-		_trie.get()->parrent = nullptr;
+		_trie = std::make_shared<Node>();
+		
 		_size = 0;
 	}
 
@@ -244,7 +234,7 @@ protected:
 				return false;
 			}
 		}
-		return curNode->value.get() != nullptr;
+		return curNode->value != nullptr;
 	}
 
 

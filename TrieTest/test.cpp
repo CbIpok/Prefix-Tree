@@ -25,7 +25,7 @@ TEST_F(PoolTesting, Clear)
 {
 
 	Trie<char> trie;
-	ifstream f("test.txt");
+	ifstream f("test.txt");//voina i mir
 	ASSERT_TRUE(f);
 	while (!f.eof())
 	{
@@ -181,4 +181,19 @@ TEST(Trie, SubTrie)
 		mTree2[i.first] = i.second;
 	}
 	ASSERT_TRUE(mTree == mTree2);
+}
+
+TEST(TrieIterator, CorrectOder)
+{
+	Trie<int> trie;
+	for (size_t i = 0; i < 1000; i++)
+	{
+		trie[to_string(i)] = i;
+	}
+	auto prev = (*trie.begin()).first;
+	for (auto& i : trie)
+	{
+		ASSERT_TRUE(i.first >= prev);
+		prev = i.first;
+	}
 }
