@@ -1,5 +1,4 @@
 #pragma once
-#include <stack>
 #include <string>
 
 class StringStack final

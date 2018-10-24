@@ -1,5 +1,4 @@
 #pragma once
-#include "Trie.h"
 #include "TrieIterator.h"
 #include <string>
 
@@ -29,11 +28,17 @@ public:
 
 
 	SubTrie<T> GetSubTrie(const key_type & subKey) = delete;
+	std::pair<iterator, bool> insert(const key_type& k, const value_type& val) = delete;
+	template <class InputIterator> void insert(InputIterator first, InputIterator last) = delete;
+	void erase(iterator position) = delete;
+	size_t erase(const key_type& k) = delete;
+	void erase(iterator first, iterator last) = delete;
+	void clear() = delete;
 
 	size_t size() const
 	{
 		size_t size = 0;
-		for (auto& i : this)
+		for (const auto& i : this)
 		{
 			size++;
 		}

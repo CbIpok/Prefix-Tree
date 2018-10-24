@@ -197,3 +197,52 @@ TEST(TrieIterator, CorrectOder)
 		prev = i.first;
 	}
 }
+
+TEST(SubTrie, ModificateElements)
+{
+	Trie<int> trie;
+	map<string, int> mTree;
+	for (size_t i = 0; i < 1000; i++)
+	{
+		std::string key = to_string(i);
+		if (key.substr(0, 2) == "10")
+		{
+			mTree[key] = 0;
+		}
+		trie[to_string(i)] = i;
+	}
+	auto subTrie = trie.GetSubTrie("10");
+	//modificate subtrie elements
+	for (auto& i : subTrie)
+	{
+		i.second = 0;
+	}
+	map<string, int> mTree2;
+	for (auto& i : subTrie)
+	{
+		mTree2[i.first] = i.second;
+	}
+	ASSERT_TRUE(mTree == mTree2);
+		
+}
+
+TEST(SubTrie, FindElements)
+{
+	Trie<int> trie;
+	map<string, int> mTree;
+	for (size_t i = 0; i < 1000; i++)
+	{
+		std::string key = to_string(i);
+		if (key.substr(0, 2) == "10")
+		{
+			mTree[key] = 0;
+		}
+		trie[to_string(i)] = i;
+	}
+	auto subTrie = trie.GetSubTrie("10");
+	for (auto& i : mTree)
+	{
+		subTrie.find(i.first);//trow exeption in bad case
+	}
+	
+}
